@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekmenu</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/thema.js"></script>
+</head>
+<body>
+  <header class="kop">
+    <div class="kop-titel">
+      <h1>Weekmenu</h1>
+      <span class="kop-sub" id="weekBereik"></span>
+    </div>
+    <div class="kop-acties">
+      <label class="veld">
+        <span>Week</span>
+        <select id="weekKeuze"></select>
+      </label>
+      <button type="button" class="knop primair" id="nieuwMenu" hidden>Nieuw menu…</button>
+      <button type="button" class="knop" id="afdrukken" title="Afdrukken">Afdrukken</button>
+      <button type="button" class="knop icoon" id="themaKnop" title="Licht/donker thema" aria-label="Licht/donker thema"></button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button type="button" role="tab" class="tab actief" data-tab="menu" aria-selected="true">Menu</button>
+    <button type="button" role="tab" class="tab" data-tab="boodschappen" aria-selected="false">Boodschappen</button>
+  </nav>
+
+  <main>
+    <section id="leeg" class="leeg" hidden>
+      <h2>Nog geen weekmenu</h2>
+      <div id="leegCli">
+        <p>Open een terminal in deze map en voer uit:</p>
+        <pre>node weekmenu.js</pre>
+        <p>Daarna deze pagina vernieuwen. Of start de server (<code>node weekmenu.js --server</code>) om het menu vanuit de pagina te maken.</p>
+      </div>
+      <p id="leegServer" hidden>Klik op <strong>Nieuw menu…</strong> bovenaan.</p>
+    </section>
+
+    <section id="paneel-menu" class="paneel">
+      <ol class="dagen" id="dagen"></ol>
+    </section>
+
+    <section id="paneel-boodschappen" class="paneel" hidden>
+      <div class="balk">
+        <label class="veld">
+          <span>Personen</span>
+          <input type="number" id="personen" min="1" max="20" step="1" value="4">
+        </label>
+        <span class="balk-info" id="lijstInfo"></span>
+        <span class="vul"></span>
+        <button type="button" class="knop" id="kopieer">Kopieer als tekst</button>
+        <button type="button" class="knop" id="wisVinkjes">Vinkjes wissen</button>
+      </div>
+      <div class="lijsten">
+        <div>
+          <h2>Te kopen</h2>
+          <ul class="lijst" id="lijstKopen"></ul>
+        </div>
+        <div>
+          <h2>Voorraadkast &amp; naar smaak</h2>
+          <ul class="lijst" id="lijstVoorraad"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="voet">
+    <span>Recepten: <a href="https://dagelijksekost.vrt.be/az-index" target="_blank" rel="noopener">Dagelijkse kost (VRT)</a> – enkel voor persoonlijk gebruik.</span>
+    <span id="dataInfo"></span>
+  </footer>
+
+  <dialog id="nieuwDialoog" class="dialoog">
+    <form method="dialog">
+      <h2>Nieuw menu</h2>
+      <p class="zacht">Er worden willekeurig 7 hoofdgerechten gekozen die de laatste 8 weken niet op het menu stonden. Dit duurt ongeveer 10–40 seconden.</p>
+      <div class="keuzes" id="nieuwKeuzes"></div>
+      <p class="zacht" id="nieuwStatus" role="status"></p>
+      <div class="dialoog-acties">
+        <button type="submit" class="knop stil" id="nieuwSluit">Sluiten</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="melding" id="melding" role="status" hidden></div>
+
+  <script src="data/data.js"></script>
+  <script src="js/boodschappen.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

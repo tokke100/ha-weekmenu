@@ -1,0 +1,27 @@
+# Home Assistant – Weekmenu automatisch elke week
+#
+# 1) In configuration.yaml (daarna HA herstarten of "YAML-configuratie herladen → REST-commando's"):
+
+rest_command:
+  weekmenu_nieuw:
+    # hostname: zie infopagina van de add-on (via repository: "<hash>-weekmenu", lokaal: "local-weekmenu")
+    url: "http://local-weekmenu:8099/api/week"
+    method: POST
+    content_type: "application/json"
+    payload: '{"volgende": true}'                 # menu voor volgende week; bestaat het al, dan gebeurt er niets
+    timeout: 180
+
+# 2) Automatisering (Instellingen → Automatiseringen → Nieuw → ⋮ → Bewerken in YAML), plak vanaf "alias":
+#
+# alias: Weekmenu – menu voor volgende week
+# description: Elke zaterdag om 10:00 een nieuw weekmenu
+# triggers:
+#   - trigger: time
+#     at: "10:00:00"
+# conditions:
+#   - condition: time
+#     weekday:
+#       - sat
+# actions:
+#   - action: rest_command.weekmenu_nieuw
+# mode: single

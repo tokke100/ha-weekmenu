@@ -1,0 +1,192 @@
+/* Weekmenu – neutrale stijl met licht/donker thema */
+:root {
+  --bg: #f7f4ef;
+  --oppervlak: #ffffff;
+  --oppervlak-2: #f0ebe3;
+  --tekst: #2a2622;
+  --tekst-zacht: #6e665d;
+  --lijn: #e2dbd0;
+  --accent: #b5532a;
+  --accent-zacht: #f6e3d9;
+  --accent-tekst: #ffffff;
+  --ok: #4f7a3a;
+  --schaduw: 0 1px 2px rgba(40, 30, 20, .06), 0 4px 14px rgba(40, 30, 20, .05);
+  --radius: 12px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1b1916;
+    --oppervlak: #252220;
+    --oppervlak-2: #2f2b27;
+    --tekst: #ece6de;
+    --tekst-zacht: #a89f94;
+    --lijn: #3a3530;
+    --accent: #e08a5f;
+    --accent-zacht: #3d2a20;
+    --accent-tekst: #1b1916;
+    --ok: #93bb7c;
+    --schaduw: none;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1b1916;
+  --oppervlak: #252220;
+  --oppervlak-2: #2f2b27;
+  --tekst: #ece6de;
+  --tekst-zacht: #a89f94;
+  --lijn: #3a3530;
+  --accent: #e08a5f;
+  --accent-zacht: #3d2a20;
+  --accent-tekst: #1b1916;
+  --ok: #93bb7c;
+  --schaduw: none;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--tekst);
+  font: 15px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+a { color: var(--accent); }
+h1, h2, h3, h4 { line-height: 1.25; }
+[hidden] { display: none !important; }
+
+/* kop */
+.kop {
+  display: flex; flex-wrap: wrap; gap: 12px 24px;
+  align-items: flex-end; justify-content: space-between;
+  padding: 24px 0 12px;
+}
+.kop h1 { margin: 0; font-size: 28px; letter-spacing: -.01em; }
+.kop-sub { color: var(--tekst-zacht); }
+.kop-acties { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+
+.veld { display: inline-flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--tekst-zacht); }
+select, input[type="number"] {
+  font: inherit; font-size: 14px; color: var(--tekst);
+  background: var(--oppervlak); border: 1px solid var(--lijn); border-radius: 8px;
+  padding: 6px 10px; min-height: 36px;
+}
+input[type="number"] { width: 80px; }
+
+.knop {
+  font: inherit; font-size: 14px; cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 36px; padding: 6px 14px;
+  color: var(--tekst); background: var(--oppervlak);
+  border: 1px solid var(--lijn); border-radius: 8px;
+}
+.knop:hover { border-color: var(--accent); color: var(--accent); }
+.knop:focus-visible, .tab:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.knop.primair { background: var(--accent); border-color: var(--accent); color: var(--accent-tekst); }
+.knop.primair:hover { color: var(--accent-tekst); filter: brightness(1.08); }
+.knop:disabled { opacity: .55; cursor: progress; }
+.knop.icoon { width: 36px; padding: 0; font-size: 16px; }
+.knop.klein { min-height: 30px; padding: 4px 10px; font-size: 13px; }
+.knop.stil { border-color: transparent; background: transparent; color: var(--tekst-zacht); }
+.knop.stil:hover { color: var(--accent); }
+
+/* tabs */
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--lijn); margin-bottom: 16px; }
+.tab {
+  font: inherit; cursor: pointer; background: none; border: 0; color: var(--tekst-zacht);
+  padding: 10px 14px; border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.tab.actief { color: var(--tekst); border-bottom-color: var(--accent); font-weight: 600; }
+
+/* menu */
+.dagen { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.dag {
+  background: var(--oppervlak); border: 1px solid var(--lijn); border-radius: var(--radius);
+  box-shadow: var(--schaduw); padding: 14px 18px;
+}
+.dag.vervangen { border-left: 4px solid var(--accent); }
+.dag-kop { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.dag-naam { font-weight: 700; text-transform: uppercase; font-size: 12px; letter-spacing: .08em; color: var(--accent); }
+.dag-datum { color: var(--tekst-zacht); font-size: 13px; }
+.label { font-size: 11px; background: var(--accent-zacht); color: var(--accent); border-radius: 999px; padding: 1px 8px; }
+.dag h3 { margin: 4px 0 2px; font-size: 19px; }
+.dag h3 a { color: var(--tekst); text-decoration: none; }
+.dag h3 a:hover { color: var(--accent); text-decoration: underline; }
+.meta { margin: 0; color: var(--tekst-zacht); font-size: 13px; }
+.beschrijving { margin: 6px 0 0; color: var(--tekst-zacht); max-width: 75ch; }
+.dag-acties { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+
+.recept { margin-top: 10px; }
+.recept summary { cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 600; width: fit-content; }
+.recept-inhoud {
+  display: grid; grid-template-columns: minmax(200px, 1fr) 2fr; gap: 20px;
+  margin-top: 10px; padding: 14px; background: var(--oppervlak-2); border-radius: 10px;
+}
+.recept h4 { margin: 0 0 6px; font-size: 14px; }
+.ingredienten { margin: 0; padding-left: 18px; }
+.ingredienten li { margin: 2px 0; }
+.stappen ol { margin: 0 0 6px; padding-left: 22px; }
+.stappen li { margin: 0 0 8px; }
+.stappen h5 { margin: 12px 0 6px; font-size: 13px; color: var(--accent); }
+.stappen h5:first-child { margin-top: 0; }
+.tip { display: block; margin-top: 4px; font-size: 13px; color: var(--tekst-zacht); font-style: italic; }
+
+/* dialoog */
+.dialoog {
+  border: 1px solid var(--lijn); border-radius: var(--radius); padding: 20px 22px;
+  background: var(--oppervlak); color: var(--tekst); width: min(460px, calc(100% - 32px));
+}
+.dialoog::backdrop { background: rgba(0, 0, 0, .45); }
+.dialoog h2 { margin: 0 0 6px; font-size: 18px; }
+.zacht { color: var(--tekst-zacht); font-size: 14px; }
+.keuzes { display: grid; gap: 8px; margin: 14px 0; }
+.keuze { justify-content: flex-start; text-align: left; }
+.dialoog-acties { display: flex; justify-content: flex-end; }
+
+/* boodschappen */
+.balk { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-bottom: 14px; }
+.balk-info { color: var(--tekst-zacht); font-size: 13px; padding-bottom: 8px; }
+.vul { flex: 1; }
+.lijsten { display: grid; grid-template-columns: 3fr 2fr; gap: 16px; }
+.lijsten > div { background: var(--oppervlak); border: 1px solid var(--lijn); border-radius: var(--radius); padding: 14px 18px; box-shadow: var(--schaduw); }
+.lijsten h2 { font-size: 16px; margin: 0 0 8px; }
+.lijst { list-style: none; margin: 0; padding: 0; }
+.lijst li { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid var(--lijn); }
+.lijst li:last-child { border-bottom: 0; }
+.lijst input { margin-top: 4px; accent-color: var(--accent); width: 16px; height: 16px; flex: none; }
+.lijst label { flex: 1; display: flex; flex-wrap: wrap; gap: 0 8px; cursor: pointer; }
+.hoeveel { font-weight: 600; min-width: 4.5em; }
+.wanneer { margin-left: auto; color: var(--tekst-zacht); font-size: 12px; }
+.lijst li.af label { color: var(--tekst-zacht); text-decoration: line-through; }
+
+/* leeg */
+.leeg { background: var(--oppervlak); border: 1px dashed var(--lijn); border-radius: var(--radius); padding: 24px; }
+.leeg pre { background: var(--oppervlak-2); padding: 10px 14px; border-radius: 8px; width: fit-content; }
+
+.voet {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px;
+  color: var(--tekst-zacht); font-size: 12px; padding: 24px 0 32px;
+}
+.melding {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
+  background: var(--tekst); color: var(--bg); padding: 10px 16px; border-radius: 8px;
+  max-width: calc(100% - 32px); font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .recept-inhoud, .lijsten { grid-template-columns: 1fr; }
+  .kop h1 { font-size: 24px; }
+}
+
+@media print {
+  :root { --bg: #fff; --oppervlak: #fff; --oppervlak-2: #fff; --tekst: #000; --tekst-zacht: #444; --lijn: #ccc; --schaduw: none; }
+  body { max-width: none; padding: 0; font-size: 11pt; }
+  .kop-acties, .tabs, .dag-acties, .balk .knop, .melding, .voet a { display: none !important; }
+  .dag, .lijsten > div { break-inside: avoid; box-shadow: none; }
+  .recept summary { display: none; }
+  .dag a { color: #000; }
+}
